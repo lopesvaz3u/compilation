@@ -1,0 +1,50 @@
+| Code genere par le compilateur 
+.include beta.uasm
+.include intio.uasm
+.options tty
+
+    CMOVE(pile,SP)
+    BR(debut)
+i: LONG(0)
+
+main:
+PUSH (LP)
+PUSH (BP)
+MOVE (SP, BP)
+ALLOCATE (0)
+RDINT()
+PUSH (r0)
+POP (r0)
+ST(r0, i)
+si_1:
+LD(i, r0)
+PUSH (r0)
+CMOVE(10, r0)
+PUSH (r0)
+POP (r2)
+POP (r1)
+CMPLT (r1, r2, r3)
+PUSH (r3)
+POP (r0)
+BF(R0, sinon_1)
+alors_1:
+CMOVE(1, r0)
+PUSH (r0)
+POP (r0)
+WRINT()
+BR(fsi_1)
+sinon_1:
+CMOVE(2, r0)
+PUSH (r0)
+POP (r0)
+WRINT()
+fsi_1:
+DEALLOCATE (0)
+POP (BP)
+POP (LP)
+RTN()
+
+debut:
+CALL(main)
+HALT()
+pile:

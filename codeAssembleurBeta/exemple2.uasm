@@ -1,0 +1,26 @@
+| Code genere par le compilateur 
+.include beta.uasm
+.include intio.uasm
+.options tty
+
+    CMOVE(pile,SP)
+    BR(debut)
+i: LONG(10)
+j: LONG(20)
+k: LONG(0)
+l: LONG(0)
+
+main:
+PUSH (LP)
+PUSH (BP)
+MOVE (SP, BP)
+ALLOCATE (0)
+DEALLOCATE (0)
+POP (BP)
+POP (LP)
+RTN()
+
+debut:
+CALL(main)
+HALT()
+pile:
